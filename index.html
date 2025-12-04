@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNI CO – بخش اطلاعات و امنیت</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #0e1117;
+      color: #e6e6e6;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      animation: fadeIn 1s ease;
+    }
+    h1 {
+      margin: 0;
+      font-size: 36px;
+      letter-spacing: 2px;
+    }
+    h2 {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 300;
+      opacity: 0.8;
+    }
+    #searchBox {
+      display: block;
+      width: 90%;
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      background: #1a1f27;
+      color: #fff;
+      animation: slideDown 0.8s ease;
+    }
+    #list {
+      width: 95%;
+      max-width: 700px;
+      margin: auto;
+      padding-bottom: 80px;
+      animation: fadeIn 0.6s ease;
+    }
+    .item {
+      background: #1a1f27;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s;
+    }
+    .item:hover {
+      transform: translateY(-3px);
+    }
+    .btn {
+      padding: 8px 14px;
+      background: #2864ff;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: #1e4ed8;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      opacity: 0.6;
+      font-size: 14px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-12px); opacity:0; }
+      to { transform: translateY(0); opacity:1; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>DNI CO</h1>
+  <h2>بخش اطلاعات و امنیت</h2>
+</header>
+
+<input type="text" id="searchBox" placeholder="جستجو در پرونده‌ها..." />
+
+<div id="list"></div>
+
+<footer>تمامی حقوق متعلق به DNI CO</footer>
+
+<script>
+  async function loadDocs() {
+    const res = await fetch("doc.json");
+    const data = await res.json();
+    return data;
+  }
+
+  function render(docs, search="") {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    const filtered = docs.filter(d => d.name.toLowerCase().includes(search.toLowerCase()));
+
+    filtered.forEach(doc => {
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `
+        <span>${doc.id} — ${doc.name}</span>
+        <a class="btn" href="doc/${doc.file}" download>دانلود</a>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  loadDocs().then(docs => {
+    render(docs);
+
+    document.getElementById("searchBox").addEventListener("input", e => {
+      render(docs, e.target.value);
+    });
+  });
+</script>
+
+</body>
+</html>
