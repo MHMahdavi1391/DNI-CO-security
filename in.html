@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNI CO – ورود</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #0e1117;
+      color: #e6e6e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      width: 90%;
+      max-width: 400px;
+      background: #1a1f27;
+      padding: 30px;
+      border-radius: 14px;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+    h1 { margin: 0; font-size: 30px; letter-spacing: 2px; }
+    h2 { margin-top: 8px; font-size: 15px; opacity: 0.8; }
+    input {
+      width: 100%;
+      margin-top: 18px;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #0e1117;
+      color: white;
+      font-size: 15px;
+      outline: none;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #2864ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover { background: #1e4ed8; }
+    #msg { margin-top: 15px; font-size: 14px; opacity: 0.8; }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>DNI CO</h1>
+    <h2>بخش اطلاعات و امنیت</h2>
+
+    <input id="user" type="text" placeholder="نام کاربری" />
+    <input id="pass" type="password" placeholder="رمز عبور" />
+    <button onclick="login()">ورود</button>
+    <div id="msg"></div>
+
+    <footer style="margin-top:25px; opacity:0.6; font-size:13px;">تمامی حقوق متعلق به DNI CO</footer>
+  </div>
+
+<script>
+async function loadUsers() {
+  const res = await fetch("users.json");
+  return await res.json();
+}
+
+async function login() {
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
+  const msg = document.getElementById("msg");
+
+  const users = await loadUsers();
+  const match = users.find(x => x.username === u && x.password === p);
+
+  if (match) {
+    msg.innerHTML = `کاربر ${match.name} خوش آمدید`;
+    setTimeout(() => { window.location.href = "home.html"; }, 1200);
+  } else {
+    msg.innerHTML = "نام کاربری یا رمز اشتباه است";
+  }
+}
+</script>
+</body>
+</html>
