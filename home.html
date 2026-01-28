@@ -10,37 +10,125 @@
       font-family: sans-serif;
       background: #0e1117;
       color: #e6e6e6;
+      min-height: 100vh;
     }
+    
+    /* نوار هشدار */
+    .alert-bar {
+      background: linear-gradient(90deg, #ff4444, #ff6b6b);
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+      animation: slideDown 0.5s ease;
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .alert-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 2s infinite;
+    }
+    
     header {
       text-align: center;
       padding: 40px 20px;
       animation: fadeIn 1s ease;
+      position: relative;
     }
+    
+    .user-info {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      background: rgba(26, 31, 39, 0.8);
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .logout-btn {
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: 0.3s;
+    }
+    
+    .logout-btn:hover {
+      background: #cc0000;
+    }
+    
     h1 {
       margin: 0;
       font-size: 36px;
       letter-spacing: 2px;
     }
+    
     h2 {
       margin-top: 10px;
       font-size: 18px;
       font-weight: 300;
       opacity: 0.8;
     }
-    #searchBox {
-      display: block;
+    
+    /* کانتینر جستجو */
+    .search-container {
       width: 90%;
       max-width: 400px;
       margin: 30px auto;
-      padding: 12px 15px;
+      position: relative;
+      animation: slideDown 0.8s ease;
+    }
+    
+    #searchBox {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
       border-radius: 10px;
-      border: none;
+      border: 2px solid #1a1f27;
       font-size: 16px;
       outline: none;
       background: #1a1f27;
       color: #fff;
-      animation: slideDown 0.8s ease;
+      transition: all 0.3s;
     }
+    
+    #searchBox:focus {
+      border-color: #2864ff;
+      box-shadow: 0 0 0 3px rgba(40, 100, 255, 0.1);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6c757d;
+      font-size: 18px;
+    }
+    
+    /* اطلاعات تعداد */
+    .count-info {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+      opacity: 0.8;
+      animation: fadeIn 0.6s ease;
+    }
+    
     #list {
       width: 95%;
       max-width: 700px;
@@ -48,92 +136,281 @@
       padding-bottom: 80px;
       animation: fadeIn 0.6s ease;
     }
+    
     .item {
-      background: #1a1f27;
-      padding: 15px 20px;
+      background: linear-gradient(135deg, #1a1f27, #232834);
+      padding: 18px 25px;
       border-radius: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: transform 0.2s;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
+    
     .item:hover {
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      border-color: rgba(40, 100, 255, 0.3);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
     }
+    
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .item-id {
+      font-size: 12px;
+      opacity: 0.6;
+      font-family: monospace;
+    }
+    
+    .item-name {
+      font-size: 16px;
+    }
+    
     .btn {
-      padding: 8px 14px;
-      background: #2864ff;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #2864ff, #1e4ed8);
       border-radius: 8px;
       color: #fff;
       text-decoration: none;
       font-size: 14px;
-      transition: 0.2s;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
     }
+    
     .btn:hover {
-      background: #1e4ed8;
+      background: linear-gradient(135deg, #1e4ed8, #1542b8);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(40, 100, 255, 0.3);
     }
+    
+    /* استایل برای وقتی نتیجه‌ای نیست */
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      opacity: 0.6;
+      animation: fadeIn 0.6s ease;
+    }
+    
     footer {
       text-align: center;
       padding: 20px;
       opacity: 0.6;
       font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 40px;
     }
+    
+    /* انیمیشن‌ها */
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+    
     @keyframes slideDown {
-      from { transform: translateY(-12px); opacity:0; }
+      from { transform: translateY(-20px); opacity:0; }
       to { transform: translateY(0); opacity:1; }
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    /* ریسپانسیو */
+    @media (max-width: 768px) {
+      .item {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .user-info {
+        position: static;
+        margin-bottom: 15px;
+        justify-content: center;
+      }
+      
+      header {
+        padding-top: 20px;
+      }
+      
+      h1 {
+        font-size: 28px;
+      }
+      
+      h2 {
+        font-size: 16px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .search-container {
+        width: 95%;
+      }
+      
+      .item {
+        padding: 15px;
+      }
+      
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- نوار هشدار برای دسترسی غیرمجاز -->
+  <div class="alert-bar" id="alertBar">
+    <strong>⚠ هشدار امنیتی:</strong> دسترسی غیرمجاز شناسایی شد! در حال هدایت به صفحه ورود...
+  </div>
 
-<header>
-  <h1>DNI CO</h1>
-  <h2>بخش اطلاعات و امنیت</h2>
-</header>
+  <header>
+    <!-- اطلاعات کاربر -->
+    <div class="user-info" id="userInfo">
+      <span id="userName"></span>
+      <button class="logout-btn" onclick="logout()">خروج</button>
+    </div>
+    
+    <h1>DNI CO</h1>
+    <h2>بخش اطلاعات و امنیت</h2>
+  </header>
 
-<input type="text" id="searchBox" placeholder="جستجو در پرونده‌ها..." />
+  <!-- جستجو -->
+  <div class="search-container">
+    <input type="text" id="searchBox" placeholder="جستجو در پرونده‌ها (نام یا شماره پرونده)..." />
+    <div class="search-icon">🔍</div>
+  </div>
+  
+  <!-- تعداد نتایج -->
+  <div class="count-info" id="countInfo"></div>
 
-<div id="list"></div>
+  <!-- لیست پرونده‌ها -->
+  <div id="list">
+    <div class="no-results" id="noResults" style="display: none;">
+      پرونده‌ای با مشخصات جستجو شده یافت نشد.
+    </div>
+  </div>
 
-<footer>تمامی حقوق متعلق به DNI CO</footer>
+  <footer>تمامی حقوق متعلق به DNI CO</footer>
 
-<script>
-  async function loadDocs() {
-    const res = await fetch("doc.json");
-    const data = await res.json();
-    return data;
-  }
-
-  function render(docs, search="") {
-    const list = document.getElementById("list");
-    list.innerHTML = "";
-
-    const filtered = docs.filter(d => d.name.toLowerCase().includes(search.toLowerCase()));
-
-    filtered.forEach(doc => {
-      const div = document.createElement("div");
-      div.className = "item";
-      div.innerHTML = `
-        <span>${doc.id} — ${doc.name}</span>
-        <a class="btn" href="doc/${doc.file}" download>دانلود</a>
-      `;
-      list.appendChild(div);
+  <script>
+    // بررسی لاگین هنگام لود صفحه
+    window.addEventListener('DOMContentLoaded', () => {
+      const loggedInUser = localStorage.getItem('dniLoggedInUser');
+      const alertBar = document.getElementById('alertBar');
+      
+      if (!loggedInUser) {
+        // نمایش هشدار امنیتی
+        alertBar.style.display = 'block';
+        
+        // هدایت به صفحه ورود بعد از 3 ثانیه
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 3000);
+        
+        // جلوگیری از ادامه لود صفحه
+        document.body.style.display = 'none';
+      } else {
+        // نمایش اطلاعات کاربر
+        try {
+          const user = JSON.parse(loggedInUser);
+          document.getElementById('userName').textContent = user.name;
+        } catch (e) {
+          localStorage.removeItem('dniLoggedInUser');
+          window.location.href = "index.html";
+        }
+        
+        // بارگذاری پرونده‌ها
+        loadDocs();
+      }
     });
-  }
-
-  loadDocs().then(docs => {
-    render(docs);
-
-    document.getElementById("searchBox").addEventListener("input", e => {
-      render(docs, e.target.value);
+    
+    // بارگذاری پرونده‌ها
+    async function loadDocs() {
+      try {
+        const res = await fetch("doc.json");
+        const data = await res.json();
+        render(data, "");
+        
+        // تنظیم جستجو
+        document.getElementById("searchBox").addEventListener("input", e => {
+          render(data, e.target.value);
+        });
+      } catch (error) {
+        console.error("خطا در بارگذاری پرونده‌ها:", error);
+        document.getElementById("list").innerHTML = 
+          '<div class="no-results">خطا در بارگذاری پرونده‌ها</div>';
+      }
+    }
+    
+    // رندر لیست
+    function render(docs, search="") {
+      const list = document.getElementById("list");
+      const countInfo = document.getElementById("countInfo");
+      const noResults = document.getElementById("noResults");
+      
+      // فیلتر کردن (هم بر اساس نام و هم ID)
+      const filtered = docs.filter(d => 
+        d.name.toLowerCase().includes(search.toLowerCase()) || 
+        d.id.toString().includes(search)
+      );
+      
+      // نمایش تعداد نتایج
+      countInfo.textContent = `${filtered.length} پرونده یافت شد`;
+      
+      if (filtered.length === 0) {
+        noResults.style.display = "block";
+        list.innerHTML = "";
+        return;
+      }
+      
+      noResults.style.display = "none";
+      
+      // ساخت لیست
+      let html = "";
+      filtered.forEach(doc => {
+        html += `
+          <div class="item">
+            <div class="item-info">
+              <div class="item-id">پرونده شماره: ${doc.id}</div>
+              <div class="item-name">${doc.name}</div>
+            </div>
+            <a class="btn" href="doc/${doc.file}" download>
+              📥 دانلود
+            </a>
+          </div>
+        `;
+      });
+      
+      list.innerHTML = html;
+    }
+    
+    // تابع خروج
+    function logout() {
+      if (confirm("آیا مطمئن هستید که می‌خواهید خارج شوید؟")) {
+        localStorage.removeItem('dniLoggedInUser');
+        window.location.href = "index.html";
+      }
+    }
+    
+    // جلوگیری از دسترسی به حافظه موقت
+    window.addEventListener('beforeunload', () => {
+      // در صورت نیاز می‌توانید عملیات خاصی انجام دهید
     });
-  });
-</script>
-
+    
+    // جلوگیری از back button
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
+  </script>
 </body>
 </html>
