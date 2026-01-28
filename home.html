@@ -139,7 +139,7 @@
     
     .search-input {
       width: 100%;
-      padding: 18px 25px 18px 55px;
+      padding: 18px 55px 18px 25px; /* آیکون سمت چپ، متن از راست */
       background: var(--card-bg);
       border: 2px solid var(--border);
       border-radius: var(--radius);
@@ -147,6 +147,7 @@
       font-size: 1rem;
       transition: all 0.3s;
       outline: none;
+      text-align: right;
     }
     
     .search-input:focus {
@@ -161,7 +162,7 @@
     
     .search-icon {
       position: absolute;
-      right: 25px;
+      left: 25px; /* آیکون در سمت چپ */
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-secondary);
@@ -396,7 +397,11 @@
       }
       
       .search-input {
-        padding: 16px 20px 16px 50px;
+        padding: 16px 50px 16px 20px;
+      }
+      
+      .search-icon {
+        left: 20px;
       }
       
       .documents-section {
@@ -436,8 +441,12 @@
       }
       
       .search-input {
-        padding: 14px 18px 14px 45px;
+        padding: 14px 45px 14px 18px;
         font-size: 0.95rem;
+      }
+      
+      .search-icon {
+        left: 18px;
       }
       
       .document-actions {
@@ -553,7 +562,7 @@
         // فیلتر کردن بر اساس جستجو
         const filteredDocs = searchTerm ? 
           documents.filter(doc => 
-            doc.name.includes(searchTerm) || 
+            doc.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
             doc.id.toString().includes(searchTerm)
           ) : 
           documents;
