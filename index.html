@@ -2,244 +2,432 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>DNI CO – ورود</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* استایل‌های قبلی + اضافه‌ها */
-    body {
+    :root {
+      --primary: #2864ff;
+      --primary-dark: #1e4ed8;
+      --bg: #0e1117;
+      --card-bg: #1a1f27;
+      --text: #e6e6e6;
+      --text-secondary: #a0a0a0;
+      --danger: #ff4444;
+      --success: #44ff44;
+      --border: #2d3748;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    
+    * {
       margin: 0;
-      font-family: sans-serif;
-      background: #0e1117;
-      color: #e6e6e6;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+    
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      padding: 20px;
+      line-height: 1.6;
     }
-    .box {
-      width: 90%;
-      max-width: 400px;
-      background: #1a1f27;
-      padding: 30px;
-      border-radius: 14px;
-      text-align: center;
-      animation: fadeIn 0.8s ease;
-      position: relative;
-    }
-    h1 { margin: 0; font-size: 30px; letter-spacing: 2px; }
-    h2 { margin-top: 8px; font-size: 15px; opacity: 0.8; }
-    input {
+    
+    .container {
       width: 100%;
-      margin-top: 18px;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #0e1117;
-      color: white;
-      font-size: 15px;
-      outline: none;
-      transition: all 0.3s;
-    }
-    input:focus {
-      box-shadow: 0 0 0 2px #2864ff;
-    }
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background: #2864ff;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    button:hover { 
-      background: #1e4ed8;
-      transform: translateY(-2px);
-    }
-    button:active {
-      transform: translateY(0);
-    }
-    .loading {
-      display: none;
-      margin-top: 15px;
-    }
-    .spinner {
-      border: 3px solid rgba(255,255,255,0.1);
-      border-top: 3px solid #2864ff;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 1s linear infinite;
+      max-width: 420px;
       margin: 0 auto;
     }
-    #msg { 
-      margin-top: 15px; 
-      font-size: 14px; 
-      min-height: 20px;
+    
+    .login-box {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    .logo-section {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    
+    .logo-section h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--primary), #6c8eff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .logo-section h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      opacity: 0.9;
+    }
+    
+    .input-group {
+      margin-bottom: 25px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    
+    .input-field {
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1rem;
       transition: all 0.3s;
+      outline: none;
     }
-    .error { color: #ff4444; }
-    .success { color: #44ff44; }
     
-    @keyframes fadeIn { 
-      from {opacity:0; transform: translateY(20px);} 
-      to {opacity:1; transform: translateY(0);} 
+    .input-field:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(40, 100, 255, 0.15);
     }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
     
-    /* انیمیشن برای دکمه */
+    .input-field::placeholder {
+      color: #6c757d;
+      opacity: 0.7;
+    }
+    
+    .login-btn {
+      width: 100%;
+      padding: 17px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 20px rgba(40, 100, 255, 0.3);
+    }
+    
+    .login-btn:active {
+      transform: translateY(0);
+    }
+    
     .ripple {
       position: absolute;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.6);
       transform: scale(0);
-      animation: ripple 0.6s linear;
+      animation: rippleAnim 0.6s linear;
     }
     
-    @keyframes ripple {
+    @keyframes rippleAnim {
       to {
         transform: scale(4);
         opacity: 0;
       }
     }
     
+    .loading-container {
+      display: none;
+      text-align: center;
+      margin: 25px 0;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+    
+    .loading-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    
+    .message-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      text-align: center;
+      animation: slideIn 0.3s ease;
+      display: none;
+    }
+    
+    .error {
+      background: rgba(255, 68, 68, 0.1);
+      border: 1px solid rgba(255, 68, 68, 0.3);
+      color: #ff9999;
+    }
+    
+    .success {
+      background: rgba(68, 255, 68, 0.1);
+      border: 1px solid rgba(68, 255, 68, 0.3);
+      color: #99ff99;
+    }
+    
     footer {
-      margin-top:25px; 
-      opacity:0.6; 
-      font-size:13px;
+      text-align: center;
+      margin-top: 30px;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+    
+    /* انیمیشن‌ها */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* ریسپانسیو */
+    @media (max-width: 768px) {
+      .login-box {
+        padding: 30px 25px;
+      }
+      
+      .logo-section h1 {
+        font-size: 1.9rem;
+      }
+      
+      .logo-section h2 {
+        font-size: 0.9rem;
+      }
+      
+      .input-field {
+        padding: 14px 18px;
+      }
+      
+      .login-btn {
+        padding: 16px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+      
+      .login-box {
+        padding: 25px 20px;
+        border-radius: 16px;
+      }
+      
+      .logo-section h1 {
+        font-size: 1.7rem;
+      }
+      
+      .input-field {
+        padding: 13px 16px;
+        font-size: 0.95rem;
+      }
+      
+      .login-btn {
+        padding: 15px;
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .logo-section h1 {
+        font-size: 1.5rem;
+      }
+      
+      .logo-section h2 {
+        font-size: 0.85rem;
+      }
+      
+      .login-box {
+        padding: 20px 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>DNI CO</h1>
-    <h2>بخش اطلاعات و امنیت</h2>
-
-    <input id="user" type="text" placeholder="نام کاربری" autocomplete="username" />
-    <input id="pass" type="password" placeholder="رمز عبور" autocomplete="current-password" />
-    <button onclick="login()" id="loginBtn">ورود</button>
-    
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
-      <p style="margin-top: 10px; font-size: 14px;">در حال ورود به سیستم...</p>
+  <div class="container">
+    <div class="login-box">
+      <div class="logo-section">
+        <h1>DNI CO</h1>
+        <h2>بخش اطلاعات و امنیت</h2>
+      </div>
+      
+      <div class="input-group">
+        <label for="username">نام کاربری</label>
+        <input type="text" id="username" class="input-field" placeholder="نام کاربری خود را وارد کنید" autocomplete="username">
+      </div>
+      
+      <div class="input-group">
+        <label for="password">رمز عبور</label>
+        <input type="password" id="password" class="input-field" placeholder="رمز عبور خود را وارد کنید" autocomplete="current-password">
+      </div>
+      
+      <button class="login-btn" id="loginBtn">ورود به سیستم</button>
+      
+      <div class="loading-container" id="loading">
+        <div class="spinner"></div>
+        <div class="loading-text">در حال احراز هویت...</div>
+      </div>
+      
+      <div class="message-box" id="message"></div>
     </div>
     
-    <div id="msg"></div>
-
-    <footer>تمامی حقوق متعلق به DNI CO</footer>
+    <footer>تمامی حقوق متعلق به DNI CO © 2024</footer>
   </div>
 
-<script>
-// بررسی اگر قبلاً لاگین کرده، به home هدایت شود
-window.addEventListener('DOMContentLoaded', () => {
-  const loggedInUser = localStorage.getItem('dniLoggedInUser');
-  if (loggedInUser) {
-    window.location.href = "home.html";
-  }
-});
-
-// تابع ایجاد افکت ripple برای دکمه
-function createRipple(event) {
-  const button = event.currentTarget;
-  const ripple = document.createElement("span");
-  const rect = button.getBoundingClientRect();
-  
-  const size = Math.max(rect.width, rect.height);
-  const x = event.clientX - rect.left - size / 2;
-  const y = event.clientY - rect.top - size / 2;
-  
-  ripple.style.width = ripple.style.height = size + "px";
-  ripple.style.left = x + "px";
-  ripple.style.top = y + "px";
-  ripple.classList.add("ripple");
-  
-  button.appendChild(ripple);
-  setTimeout(() => ripple.remove(), 600);
-}
-
-// بارگذاری کاربران
-async function loadUsers() {
-  try {
-    const res = await fetch("users.json");
-    return await res.json();
-  } catch (error) {
-    return [];
-  }
-}
-
-// تابع ورود
-async function login() {
-  const u = document.getElementById("user").value.trim();
-  const p = document.getElementById("pass").value.trim();
-  const msg = document.getElementById("msg");
-  const loginBtn = document.getElementById("loginBtn");
-  const loading = document.getElementById("loading");
-  
-  // پاک کردن پیام قبلی
-  msg.innerHTML = "";
-  msg.className = "";
-  
-  // اعتبارسنجی اولیه
-  if (!u || !p) {
-    msg.innerHTML = "لطفاً نام کاربری و رمز عبور را وارد کنید";
-    msg.className = "error";
-    return;
-  }
-  
-  // نمایش لودینگ
-  loginBtn.style.display = "none";
-  loading.style.display = "block";
-  
-  try {
-    const users = await loadUsers();
-    const match = users.find(x => x.username === u && x.password === p);
+  <script>
+    // بررسی اگر قبلاً لاگین کرده
+    document.addEventListener('DOMContentLoaded', () => {
+      const loggedInUser = localStorage.getItem('dniLoggedInUser');
+      if (loggedInUser) {
+        window.location.href = 'home.html';
+      }
+    });
     
-    if (match) {
-      // ذخیره اطلاعات در localStorage
-      localStorage.setItem('dniLoggedInUser', JSON.stringify({
-        username: match.username,
-        name: match.name,
-        loginTime: new Date().getTime()
-      }));
+    // افکت ripple برای دکمه
+    document.getElementById('loginBtn').addEventListener('click', function(e) {
+      const btn = e.currentTarget;
+      const ripple = document.createElement('span');
+      const rect = btn.getBoundingClientRect();
       
-      // پیام موفقیت
-      msg.innerHTML = `کاربر ${match.name} خوش آمدید`;
-      msg.className = "success";
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
       
-      // هدایت به home بعد از تاخیر
-      setTimeout(() => {
-        window.location.href = "home.html";
-      }, 1200);
-    } else {
-      // نمایش خطا
-      loginBtn.style.display = "block";
-      loading.style.display = "none";
-      msg.innerHTML = "نام کاربری یا رمز عبور اشتباه است";
-      msg.className = "error";
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.classList.add('ripple');
+      
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+      
+      login();
+    });
+    
+    // ورود با کلید Enter
+    document.getElementById('password').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        document.getElementById('loginBtn').click();
+      }
+    });
+    
+    async function loadUsers() {
+      try {
+        const response = await fetch('users.json');
+        return await response.json();
+      } catch (error) {
+        console.error('خطا در بارگذاری کاربران:', error);
+        return [];
+      }
     }
-  } catch (error) {
-    loginBtn.style.display = "block";
-    loading.style.display = "none";
-    msg.innerHTML = "خطا در ارتباط با سرور";
-    msg.className = "error";
-  }
-}
-
-// اضافه کردن event listener برای ripple effect
-document.getElementById('loginBtn').addEventListener('click', createRipple);
-
-// اضافه کردن قابلیت ورود با کلید Enter
-document.getElementById('pass').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    login();
-  }
-});
-</script>
+    
+    async function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const messageBox = document.getElementById('message');
+      const loginBtn = document.getElementById('loginBtn');
+      const loading = document.getElementById('loading');
+      
+      // پاک کردن پیام قبلی
+      messageBox.style.display = 'none';
+      messageBox.className = 'message-box';
+      messageBox.textContent = '';
+      
+      // اعتبارسنجی اولیه
+      if (!username || !password) {
+        showMessage('لطفاً نام کاربری و رمز عبور را وارد کنید', 'error');
+        return;
+      }
+      
+      // نمایش لودینگ
+      loginBtn.style.display = 'none';
+      loading.style.display = 'block';
+      
+      try {
+        const users = await loadUsers();
+        const user = users.find(u => u.username === username && u.password === password);
+        
+        if (user) {
+          // ذخیره اطلاعات لاگین
+          localStorage.setItem('dniLoggedInUser', JSON.stringify({
+            username: user.username,
+            name: user.name,
+            loginTime: new Date().getTime()
+          }));
+          
+          showMessage(`کاربر ${user.name} خوش آمدید`, 'success');
+          
+          // هدایت به صفحه اصلی
+          setTimeout(() => {
+            window.location.href = 'home.html';
+          }, 1200);
+        } else {
+          showMessage('نام کاربری یا رمز عبور اشتباه است', 'error');
+          loginBtn.style.display = 'block';
+          loading.style.display = 'none';
+        }
+      } catch (error) {
+        showMessage('خطا در ارتباط با سرور', 'error');
+        loginBtn.style.display = 'block';
+        loading.style.display = 'none';
+      }
+    }
+    
+    function showMessage(text, type) {
+      const messageBox = document.getElementById('message');
+      messageBox.textContent = text;
+      messageBox.className = `message-box ${type}`;
+      messageBox.style.display = 'block';
+    }
+  </script>
 </body>
 </html>
